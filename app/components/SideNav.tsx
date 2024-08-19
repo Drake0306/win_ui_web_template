@@ -59,7 +59,7 @@ const useStyles = makeStyles({
     root: {
         overflow: "hidden",
         display: "flex",
-        height: "600px",
+        height: "100vh",
     },
     content: {
         flex: "1",
