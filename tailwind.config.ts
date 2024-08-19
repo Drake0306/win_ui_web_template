@@ -17,4 +17,8 @@ const config: Config = {
   },
   plugins: [],
 };
+
+module.exports = {
+  reactStrictMode: false,
+};
 export default config;
