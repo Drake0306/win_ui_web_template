@@ -52,28 +52,13 @@ import {
     PersonCircle32Regular,
     PersonCircle24Regular,
 } from "@fluentui/react-icons";
-// Import Services
-import { NavPageRedirect } from "../services/RoutingService"
+import { NavPageRedirect } from "../services/RoutingService";
 
 const useStyles = makeStyles({
     root: {
         overflow: "hidden",
         display: "flex",
         height: "100vh",
-    },
-    content: {
-        flex: "1",
-        padding: "16px",
-        display: "grid",
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-    },
-    field: {
-        display: "flex",
-        marginTop: "4px",
-        marginLeft: "8px",
-        flexDirection: "column",
-        gridRowGap: tokens.spacingVerticalS,
     },
 });
 
@@ -136,17 +121,18 @@ export const SideNav = (props: Partial<NavDrawerProps>) => {
     );
 
     const urlRedirect = async (url: string) => {
-       await NavPageRedirect(url);
+        await NavPageRedirect(url);
     }
 
     return (
-        <div className={styles.root}>
+        // <div className={styles.root}>
             <NavDrawer
                 defaultSelectedValue="1"
                 defaultSelectedCategoryValue="1"
                 open={true}
                 type={"inline"}
                 size={size}
+                style={{height: "100vh"}}
             >
                 <NavDrawerHeader>
                     <Tooltip content="Navigation" relationship="label">
@@ -195,7 +181,7 @@ export const SideNav = (props: Partial<NavDrawerProps>) => {
                             <NavSubItem href="https://www.bing.com" value="8">
                                 Submissions
                             </NavSubItem>
-                            </NavSubItemGroup>
+                        </NavSubItemGroup>
                     </NavCategory>
                     <NavItem icon={<Interviews />} value="9">
                         Interviews
@@ -234,7 +220,7 @@ export const SideNav = (props: Partial<NavDrawerProps>) => {
                             <NavSubItem href="https://www.bing.com" value="18">
                                 Planning
                             </NavSubItem>
-                            </NavSubItemGroup>
+                        </NavSubItemGroup>
                     </NavCategory>
                     <NavItem target="_blank" icon={<Analytics />} value="19">
                         Workforce Data
@@ -244,6 +230,6 @@ export const SideNav = (props: Partial<NavDrawerProps>) => {
                     </NavItem>
                 </NavDrawerBody>
             </NavDrawer>
-        </div>
+        // </div>
     );
 };

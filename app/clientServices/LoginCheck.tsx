@@ -1,4 +1,3 @@
-// components/LoginCheck.tsx
 "use client";
 
 import { useUser } from '../context/UserContext';

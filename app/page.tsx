@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { AvatarLogin } from "./components/Avatar";
 import { GenericInputBox } from "./components/GenericInputBox";
 import { PauseOnHover } from "./components/Toast";
+import { LargeSpinner } from "./components/LargeSpinner";
 import { ArrowRightRegular } from "@fluentui/react-icons";
 // Import Services
 import { LoginCheck } from "./services/LoginService"
@@ -19,6 +20,7 @@ import {
   ToastTitle,
   Toast,
 } from "@fluentui/react-components";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useUser } from './context/UserContext';
 import { useRouter } from 'next/navigation';
@@ -40,6 +42,25 @@ export default function Home() {
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
   const { user, login, logout } = useUser();
+  const [isLoading, setIsLoading] = useState(true);  // Loading state
+
+  // LOADER START
+  useEffect(() => {
+    // Simulate a loading delay for demonstration purposes
+    const timer = setTimeout(() => {
+      setIsLoading(false);  // Set loading to false after component mounts
+    }, 1000);  // Adjust this timeout as needed
+
+    return () => clearTimeout(timer);  // Cleanup the timer on component unmount
+  }, []);
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LargeSpinner />
+      </div>
+    );
+  }
+  // LOADER END
 
 
   const handleClick = async () => {
@@ -54,17 +75,17 @@ export default function Home() {
     }
   };
 
-  // Generate Toast Section
-  const toasterId = useId("toaster");
-  const { dispatchToast } = useToastController(toasterId);
-  const notify = () =>
-    console.log('1')
-    dispatchToast(
-      <Toast>
-        <ToastTitle>Hover me!</ToastTitle>
-      </Toast>,
-      { pauseOnHover: true, intent: "info" }
-    );
+  // // Generate Toast Section
+  // const toasterId = useId("toaster");
+  // const { dispatchToast } = useToastController(toasterId);
+  // const notify = () =>
+  //   console.log('1')
+  //   dispatchToast(
+  //     <Toast>
+  //       <ToastTitle>Hover me!</ToastTitle>
+  //     </Toast>,
+  //     { pauseOnHover: true, intent: "info" }
+  //   );
 
   return (
     <>
@@ -92,7 +113,7 @@ export default function Home() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Toaster toasterId={toasterId} />
+              {/* <Toaster toasterId={toasterId} /> */}
             </Col>
           </center>
         </Row>
